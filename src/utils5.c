@@ -6,7 +6,7 @@
 /*   By: hcorrea- <hcorrea-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 13:15:40 by hcorrea-          #+#    #+#             */
-/*   Updated: 2023/03/10 14:07:06 by hcorrea-         ###   ########.fr       */
+/*   Updated: 2023/03/10 17:04:10 by hcorrea-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,20 @@ char	**array_dup(char **array)
 	return (new);
 }
 
+void	array_clear(char **array)
+{
+	int	i;
+
+	i = 0;
+	while (array[i])
+	{
+		free(array[i]);
+		i++;
+	}
+	free(array);
+	array = NULL;
+}
+
 int	can_p(char **lines, int x, int y, int dir)
 {
 	char	**map_dup;
@@ -56,6 +70,7 @@ int	can_p(char **lines, int x, int y, int dir)
 	{
 		map_dup = array_dup(lines);
 		dir = can_p(map_dup, x, y, 5);
+		array_clear(map_dup);
 		return (dir);
 	}
 	if (x < 0 || y < 0 || !lines[x][y] || lines[x][y] == '1')

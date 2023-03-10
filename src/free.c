@@ -6,7 +6,7 @@
 /*   By: hcorrea- <hcorrea-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 14:45:49 by hcorrea-          #+#    #+#             */
-/*   Updated: 2023/03/10 15:22:37 by hcorrea-         ###   ########.fr       */
+/*   Updated: 2023/03/10 17:05:28 by hcorrea-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	clear_map(t_data *data)
 	free(data->map->lines);
 	data->map->lines = NULL;
 	close(data->map->fd);
+	free(data->map);
 }
 
 void	clear_pacman(t_data *data)
@@ -64,6 +65,7 @@ void	clear_all(t_data *data)
 	clear_enemy(data);
 	clear_map(data);
 	clear_consumable_exit(data);
+	free(data);
 	mlx_destroy_window(data->mlx, data->win);
 	free(data->mlx);
 }

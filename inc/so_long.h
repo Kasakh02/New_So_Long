@@ -6,23 +6,23 @@
 /*   By: hcorrea- <hcorrea-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 15:12:56 by hcorrea-          #+#    #+#             */
-/*   Updated: 2023/03/10 15:49:40 by hcorrea-         ###   ########.fr       */
+/*   Updated: 2023/03/10 16:42:19 by hcorrea-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
-# define SO_LONG_H
+#define SO_LONG_H
 
-# include "../mlx/mlx.h"
-# include "../Libft/inc/libft.h"
-# include <stdlib.h>
-# include <math.h>
-# include <stdio.h>
-# include <time.h>
-# include <sys/time.h>
-# include <stdbool.h>
-# include <fcntl.h>
-# include <stdlib.h>
+#include "../mlx_linux/mlx.h"
+#include "../Libft/inc/libft.h"
+#include <stdlib.h>
+#include <math.h>
+#include <stdio.h>
+#include <time.h>
+#include <sys/time.h>
+#include <stdbool.h>
+#include <fcntl.h>
+#include <stdlib.h>
 
 # define WW 1440
 # define WH 870
@@ -30,11 +30,11 @@
 # define ENEMY_FRAME_RATE 500
 # define VULNERABLE 5000
 
-# define GREEN_PIXEL 0x00FF00
-# define RED_PIXEL 0xFF0000
-# define WHITE_PIXEL 0xFFFFFF
-# define BLUE_PIXEL 0x0000FF
-# define BLACK_PIXEL 0x000000
+#define GREEN_PIXEL 0x00FF00
+#define RED_PIXEL 0xFF0000
+#define WHITE_PIXEL 0xFFFFFF
+#define BLUE_PIXEL 0x0000FF
+#define BLACK_PIXEL 0x000000
 
 typedef struct s_pos
 {
