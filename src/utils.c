@@ -6,7 +6,7 @@
 /*   By: hcorrea- <hcorrea-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 14:45:05 by hcorrea-          #+#    #+#             */
-/*   Updated: 2023/03/07 16:55:42 by hcorrea-         ###   ########.fr       */
+/*   Updated: 2023/03/10 15:45:09 by hcorrea-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@ void	get_size(t_data *data)
 	line = get_next_line(data->map->fd);
 	while (line)
 	{
-		data->map->width = ft_strlen(line) * 100;
+		data->map->width = ft_strlen(line) * 50;
 		data->map->lines[i] = ft_strdup(line);
 		free(line);
 		line = get_next_line(data->map->fd);
 		i++;
 	}
 	free(line);
-	data->map->height = i * 100;
+	data->map->height = i * 50;
 }
 
 void	put_pixel(t_data *data, int x, int y, int color)
@@ -39,35 +39,70 @@ void	put_pixel(t_data *data, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-int	is_wall(t_data *data, int x, int y)
+int	nbr_consumables(t_data *data)
 {
-	int	pos_y;
-	int	pos_x;
-
-	pos_y = data->pacman->curr_pos.y + y;
-	pos_x = data->pacman->curr_pos.x + x;
-	if (data->map->lines[pos_y][pos_x] == '1')
-		return (1);
-	else
-		return (0);
-}
-
-int	nbr_enemies(t_data *data)
-{
-	int i;
-	int j;
-	int	nbr_enemies;
+	int	i;
+	int	j;
+	int	nbr_consumables;
 
 	j = -1;
-	nbr_enemies = 0;
+	nbr_consumables = 0;
 	while (data->map->lines[++j])
 	{
 		i = -1;
 		while (data->map->lines[j][++i])
 		{
-			if (data->map->lines[j][i] == 'X')
-				nbr_enemies++;
+			if (data->map->lines[j][i] == 'C')
+				nbr_consumables++;
 		}
 	}
-	return(nbr_enemies);
+	return (nbr_consumables);
+}
+
+void	draw_circle(int x, int y, int color, t_data *data)
+{
+	int	i;
+	int	j;
+	int	distance_squared;
+
+	i = x + 50 / 2 - 15;
+	while (i <= x + 50 / 2 + 15)
+	{
+		j = y + 50 / 2 - 15;
+		while (j <= y + 50 / 2 + 15)
+		{
+			distance_squared = (i - (x + 50 / 2)) * (i - (x + 50 / 2))
+				+ (j - (y + 50 / 2)) * (j - (y + 50 / 2));
+			if (distance_squared <= 15 * 15)
+			{
+				put_pixel(data, i, j, color);
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
+int	map_sizes(t_data *data)
+{
+	int	i;
+	int	j;
+	int	comp_size;
+
+	i = 0;
+	comp_size = ft_strlen(data->map->lines[0]);
+	comp_size--;
+	while (data->map->lines[i])
+	{
+		j = 0;
+		while (data->map->lines[i][j])
+			j++;
+		if (data->map->lines[i][j - 1] == '\n'
+			&& data->map->lines[i][j] == '\0')
+			j--;
+		if (j != comp_size)
+			return (0);
+		i++;
+	}
+	return (1);
 }

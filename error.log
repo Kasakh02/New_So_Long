@@ -1,0 +1,22 @@
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==72792==ERROR: AddressSanitizer: SEGV on unknown address 0xffffd847d7d9d7d7 (pc 0x00010082c114 bp 0x00016f5e2e70 sp 0x00016f5e2d20 T0)
+==72792==The signal is caused by a UNKNOWN memory access.
+    #0 0x10082c114 in nbr_enemies_consumables_extra utils2.c:28
+    #1 0x10082c8a4 in valid_map utils2.c:71
+    #2 0x1008234f4 in general_init main.c:41
+    #3 0x100823bc0 in main main.c:68
+    #4 0x1a0293e4c  (<unknown module>)
+
+==72792==Register values:
+ x[0] = 0x00000001028010a0   x[1] = 0x00000001009780e0   x[2] = 0x000000016f5e2468   x[3] = 0x0000000000000104  
+ x[4] = 0x0000000000000021   x[5] = 0x0000000000000001   x[6] = 0x000000016ede8000   x[7] = 0x0000000000000001  
+ x[8] = 0x17d7d847d7d9d7d7   x[9] = 0xbebebebebebebebe  x[10] = 0x0000000000000000  x[11] = 0x0000000102e02630  
+x[12] = 0xfe488773c4586335  x[13] = 0x00000000ffffffff  x[14] = 0x0000000000007e01  x[15] = 0x0000000000000006  
+x[16] = 0x0000000100c52d4c  x[17] = 0x0000000100ca0720  x[18] = 0x0000000000000000  x[19] = 0x0000000100861c80  
+x[20] = 0x000000010082395c  x[21] = 0x0000000100861ca0  x[22] = 0x000000016f5e32f0  x[23] = 0x00000001a0309000  
+x[24] = 0x00000001fbe2b340  x[25] = 0x0000000000000000  x[26] = 0x0000000000000000  x[27] = 0x0000000000000000  
+x[28] = 0x0000000000000000     fp = 0x000000016f5e2e70     lr = 0x000000010082c8a8     sp = 0x000000016f5e2d20  
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV utils2.c:28 in nbr_enemies_consumables_extra
+==72792==ABORTING
