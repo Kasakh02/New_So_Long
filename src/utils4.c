@@ -6,7 +6,7 @@
 /*   By: hcorrea- <hcorrea-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 12:03:06 by hcorrea-          #+#    #+#             */
-/*   Updated: 2023/03/10 15:28:22 by hcorrea-         ###   ########.fr       */
+/*   Updated: 2023/03/11 09:47:46 by hcorrea-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,14 @@ void	set_enemies_state(t_data *data, int i)
 	while (++i < nbr_enemies(data))
 	{
 		if (data->pacman->curr_pos.x == data->enemy[i]->curr_pos.x
-			&& data->pacman->curr_pos.y == data->enemy[i]->curr_pos.y)
+			&& data->pacman->curr_pos.y == data->enemy[i]->curr_pos.y
+			&& data->enemy[i]->print)
 		{
 			if (data->enemy[i]->state == 0)
+			{
+				data->nbr_enemies_killed++;
 				data->enemy[i]->print = 0;
+			}
 			else
 				die(data);
 		}

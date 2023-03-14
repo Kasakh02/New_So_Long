@@ -6,7 +6,7 @@
 /*   By: hcorrea- <hcorrea-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 14:24:49 by hcorrea-          #+#    #+#             */
-/*   Updated: 2023/03/10 16:54:47 by hcorrea-         ###   ########.fr       */
+/*   Updated: 2023/03/10 15:35:01 by hcorrea-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	init_pacman(t_data *data)
 	height = 50;
 	data->pacman->mouth_open = false;
 	data->pacman->nbr_consumables = 0;
-	data->pacman->image_index = 0;
 	init_images_pacman(data, width, height);
 }
 

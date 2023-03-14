@@ -6,7 +6,7 @@
 #    By: hcorrea- <hcorrea-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/28 14:53:24 by hcorrea-          #+#    #+#              #
-#    Updated: 2023/03/10 16:17:29 by hcorrea-         ###   ########.fr        #
+#    Updated: 2023/03/10 18:51:03 by hcorrea-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,64 +15,90 @@ RED				=	\033[0;31m
 YELLOW			=	\033[0;33m
 END				=	\033[0m
 
-NAME		=	so_long
-CC			=	gcc
-FLAGS		=	-Wall -Wextra -Werror
-MLX			=	mlx_linux/Makefile.gen
-LFT			=	libft/libft.a
-INC			=	-I ./inc -I ./libft -I ./mlx_linux
-LIB			=	-L ./Libft -lft -L ./mlx_linux -lmlx_Linux -lXext -lX11 -lm -lbsd
+SO_LONG			=	so_long
 
-SRC				=	src/main.c			\
-					src/get_next_line.c	\
-					src/init.c			\
-					src/pacman.c		\
-					src/utils.c			\
-					src/render.c		\
-					src/end.c			\
-					src/gif.c			\
-					src/mallocs.c		\
-					src/enemy.c			\
-					src/init_imgs.c		\
-					src/utils2.c		\
-					src/utils3.c		\
-					src/utils4.c		\
-					src/utils5.c		\
-					src/free.c			\
+PROJECTDIR		=	src
+LIBFT_DIR		=	Libft
+INC				=	inc
+OBJ_DIR			=	obj
+HEADER			=	$(INC)
+LIBFT_HEADER	=	$(LIBFT_DIR)/$(INC)/ibft.h
+LIBFT_LIB		=	libft.a
 
-OBJ			=	$(patsubst src%, obj%, $(SRC:.c=.o))
+CC				=	gcc
+CFLAGS			=	-Wall -Wextra -Werror
+LDFLAGS			=	-L./mlx -lmlx -framework OpenGL -framework AppKit
 
-all:		$(MLX) $(LFT) obj $(NAME)
+SRC				=	main.c			\
+					get_next_line.c	\
+					init.c			\
+					pacman.c		\
+					utils.c			\
+					render.c		\
+					end.c			\
+					gif.c			\
+					mallocs.c		\
+					enemy.c			\
+					init_imgs.c		\
+					utils2.c		\
+					utils3.c		\
+					utils4.c		\
+					utils5.c		\
+					free.c			\
 
-$(NAME):	$(OBJ)
-			@$(CC) $(FLAGS) -o $@ $^ $(LIB)
+OBJ				=	$(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
+LIBFT_FILE		:=	$(LIBFT_DIR)/$(LIBFT_LIB)
 
-$(MLX):
-			@echo " [ .. ] | Compiling minilibx.."
-			@make -s -C mlx_linux
-			@echo " [ OK ] | Minilibx ready!"
+RM				=	rm -rf
+MKDIR			=	mkdir -p
+MAKE			=	make -C
+ERRIGNORE		=	2>/dev/null
 
-$(LFT):		
-			@echo " [ .. ] | Compiling libft.."
-			@make -s -C Libft
-			@echo " [ OK ] | Libft ready!"
+all:			 	$(SO_LONG)
+					@echo "$(GREEN)So_Long successfully compiled!$(END)"
+					@sleep 0.5
+					@clear
+					
+$(SO_LONG):			libft minilibx $(OBJ)
+					@clear
+					@echo "$(YELLOW)Compiling So_Long...$(END)"
+					@$(CC) $(CFLAGS) $(LDFLAGS) -I $(HEADER) -I $(LIBFT_HEADER) $(LIBFT_FILE) $(OBJ) -o $@
+					
+$(OBJ_DIR)/%.o:		$(PROJECTDIR)/%.c $(HEADER)
+					@$(MKDIR) $(dir $@)
+					@$(CC) $(CFLAGS) -I $(HEADER) -I $(LIBFT_HEADER) -o $@ -c $<
 
-obj:
-			@mkdir -p obj
+%.o:				%.c
+					@$(CC) $(CFLAGS) -I $(HEADER) -I $(LIBFT_HEADER) -Imlx -c $< -o $@
 
-obj/%.o:	src/%.c
-			@$(CC) $(FLAGS) $(INC) -o $@ -c $<
+minilibx:
+					@echo "$(YELLOW)Compiling Minilibx...$(END)"
+					@$(MAKE) mlx > /dev/null 2>&1
+					@echo "$(GREEN)Minilibx successfully compiled!$(END)"
+					@sleep 0.5
+					@clear
+
+libft:				$(LIBFT_FILE)
+
+$(LIBFT_FILE):
+					@$(MAKE) $(LIBFT_DIR)
+					@sleep 0.5
+					@clear
 
 clean:
-			@make -s $@ -C Libft
-			@rm -rf $(OBJ) obj
-			@echo "object files removed."
+					@$(RM) $(OBJ_DIR)
+					@$(MAKE) mlx clean > /dev/null 2>&1
+					@$(MAKE) $(LIBFT_DIR) clean
+					@clear
+					@echo "$(RED)All objects deleted!$(END)"
 
-fclean:		clean
-			@make -s $@ -C Libft
-			@rm -rf $(NAME)
-			@echo "binary file removed."
+fclean:				clean
+					@$(RM) $(SO_LONG)
+					@$(MAKE) $(LIBFT_DIR) fclean
+					@echo "$(RED)All executables deleted!$(END)"
+					@sleep 0.5
+					@clear
+					
+re:					fclean all
 
-re:			fclean all
-
-.PHONY:		all clean fclean re
+.PHONY:	clean, fclean, re, minilibx

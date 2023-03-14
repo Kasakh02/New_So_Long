@@ -6,13 +6,13 @@
 /*   By: hcorrea- <hcorrea-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 11:37:07 by hcorrea-          #+#    #+#             */
-/*   Updated: 2023/01/13 10:24:38 by hcorrea-         ###   ########.fr       */
+/*   Updated: 2023/03/11 09:28:15 by hcorrea-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/libft.h"
 
-int	get_size(int num)
+int	get_size_itoa(int num)
 {
 	int		size;
 
@@ -41,7 +41,7 @@ char	*ft_itoa(int nb)
 	char	*result;
 	int		i;
 
-	i = get_size(nb);
+	i = get_size_itoa(nb);
 	if (nb == -2147483648)
 		return (ft_strdup("-2147483648"));
 	if (nb == 0)

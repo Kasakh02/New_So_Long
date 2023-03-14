@@ -6,7 +6,7 @@
 /*   By: hcorrea- <hcorrea-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 15:12:06 by hcorrea-          #+#    #+#             */
-/*   Updated: 2023/03/10 16:48:44 by hcorrea-         ###   ########.fr       */
+/*   Updated: 2023/03/11 09:31:34 by hcorrea-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ int	gif(t_data *data)
 	if (vulnerable_time >= VULNERABLE || vulnerable_time < 0)
 		set_enemies_vulnerable(data, 1);
 	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
+	display_movements(data);
 	pacman_gif_utils(data, elapsed_time, now);
 	consumable(data);
 	end_exit(data);

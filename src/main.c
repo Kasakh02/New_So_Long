@@ -6,7 +6,7 @@
 /*   By: hcorrea- <hcorrea-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 15:13:57 by hcorrea-          #+#    #+#             */
-/*   Updated: 2023/03/10 16:56:48 by hcorrea-         ###   ########.fr       */
+/*   Updated: 2023/03/11 09:23:36 by hcorrea-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,20 @@
 
 int	key_press(int keycode, t_data *data)
 {
-	if (keycode == 65307)
-		close_window(data);
-	else if (keycode == 115 || keycode == 100 || keycode == 97 || keycode == 119)
+	if (keycode == 53)
+	{
+		printf("Window closed!\n");
+		exit(0);
+	}
+	else if (keycode == 0 || keycode == 1 || keycode == 2 || keycode == 13)
 		move_character(keycode, data);
 	return (1);
 }
 
 int	key_release(int keycode, t_data *data)
 {
-	if (keycode == 65307)
-		key_press(65307, data);
+	if (keycode == 53)
+		key_press(53, data);
 	return (0);
 }
 
@@ -34,6 +37,7 @@ void	general_init(t_data *data)
 
 	lines = malloc(100 * sizeof(char *));
 	data->map->lines = lines;
+	data->movements = 0;
 	get_size(data);
 	valid_map(data);
 	pacman_mallocs(data);

@@ -6,7 +6,7 @@
 /*   By: hcorrea- <hcorrea-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 15:07:59 by hcorrea-          #+#    #+#             */
-/*   Updated: 2023/03/10 15:56:15 by hcorrea-         ###   ########.fr       */
+/*   Updated: 2023/03/11 09:37:12 by hcorrea-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ int	invalid(t_data *data, int code)
 
 int	win(t_data *data)
 {
-	printf("Congrats!\nYou won!\n");
+	printf("Congrats!\nYou won!\nYou finished the game with %i "
+		"movements.\nYou killed a total of %i enemies.\n", data->movements, data->nbr_enemies_killed);
 	clear_all(data);
 	exit(0);
 }

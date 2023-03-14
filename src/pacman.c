@@ -6,7 +6,7 @@
 /*   By: hcorrea- <hcorrea-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 14:55:13 by hcorrea-          #+#    #+#             */
-/*   Updated: 2023/03/10 16:57:35 by hcorrea-         ###   ########.fr       */
+/*   Updated: 2023/03/11 09:22:40 by hcorrea-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,17 @@ int	move_character(int keycode, t_data *data)
 
 	i = -1;
 	j = -1;
-	if (keycode == 97 && !is_wall_pacman(data, -1, 0))
+	if (keycode == 0 && !is_wall_pacman(data, -1, 0))
 		upgrade_pos_render_map_pacman(data, -50, 0, 1);
-	else if (keycode == 100 && !is_wall_pacman(data, 1, 0))
+	else if (keycode == 2 && !is_wall_pacman(data, 1, 0))
 		upgrade_pos_render_map_pacman(data, 50, 0, 0);
-	else if (keycode == 115 && !is_wall_pacman(data, 0, 1))
+	else if (keycode == 1 && !is_wall_pacman(data, 0, 1))
 		upgrade_pos_render_map_pacman(data, 0, 50, 3);
-	else if (keycode == 119 && !is_wall_pacman(data, 0, -1))
+	else if (keycode == 13 && !is_wall_pacman(data, 0, -1))
 		upgrade_pos_render_map_pacman(data, 0, -50, 2);
 	else
 		return (0);
+	data->movements++;
 	nbr_enemies_consumables(data, i, j);
 	if (data->pacman->curr_pos.x == data->exit->curr_pos.x
 		&& data->pacman->curr_pos.y == data->exit->curr_pos.y

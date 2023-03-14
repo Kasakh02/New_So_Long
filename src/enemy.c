@@ -6,7 +6,7 @@
 /*   By: hcorrea- <hcorrea-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 16:02:37 by hcorrea-          #+#    #+#             */
-/*   Updated: 2023/03/10 15:04:45 by hcorrea-         ###   ########.fr       */
+/*   Updated: 2023/03/11 09:49:38 by hcorrea-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,14 @@ int	move_enemy(t_data *data)
 		{
 			rand_nbr_enemy(data, i);
 			if (data->enemy[i]->curr_pos.x == data->pacman->curr_pos.x
-				&& data->enemy[i]->curr_pos.y == data->pacman->curr_pos.y)
+				&& data->enemy[i]->curr_pos.y == data->pacman->curr_pos.y
+				&& data->enemy[i]->print)
 			{
 				if (data->enemy[i]->state == 0)
+				{
+					data->nbr_enemies_killed++;
 					data->enemy[i]->print = 0;
+				}
 				else
 					die(data);
 			}
